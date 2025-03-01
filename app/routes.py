@@ -1,6 +1,7 @@
 from . import app
 from config import logging
 from app.controllers.auth_controller import auth_bp
+from app.controllers.text_generation_controller import text_bp
 from .utils.api_responses import build_error_response, build_success_response
 from .utils.errors import UnprocessableEntityError, NotFoundError, OperationForbiddenError
 
@@ -15,6 +16,7 @@ def home():
 
 # Register authentication routes
 app.register_blueprint(auth_bp, url_prefix=API_PREFIX + "/auth")
+app.register_blueprint(text_bp, url_prefix=API_PREFIX + "/generate-text")
 
 
 @app.errorhandler(Exception)

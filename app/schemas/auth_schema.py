@@ -8,6 +8,7 @@ class UserRegisterSchema(Schema):
         validate=[validate.Length(min=3, max=50)],
         error_messages={"required": "Username is required.", "invalid": "Invalid username format."}
     )
+    
     password = fields.Str(
         required=True, 
         validate=[validate.Length(min=6)],
@@ -23,6 +24,7 @@ class UserLoginSchema(Schema):
         validate=[validate.Length(min=3, max=50)],
         error_messages={"required": "Username is required.", "invalid": "Invalid username format."}
     )
+
     password = fields.Str(
         required=True, 
         validate=[validate.Length(min=6)],

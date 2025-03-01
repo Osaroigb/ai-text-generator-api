@@ -4,15 +4,18 @@ from app.controllers.auth_controller import auth_bp
 from .utils.api_responses import build_error_response, build_success_response
 from .utils.errors import UnprocessableEntityError, NotFoundError, OperationForbiddenError
 
+# Global API prefix
+API_PREFIX = "/api"
 
 # Define the home route
-@app.route("/", methods=['GET', 'POST'])
+@app.route(API_PREFIX, methods=['GET'])
 def home():
     return build_success_response(message='Welcome to AI Text Generator api!')
     
 
 # Register authentication routes
-app.register_blueprint(auth_bp)
+app.register_blueprint(auth_bp, url_prefix=API_PREFIX + "/auth")
+
 
 @app.errorhandler(Exception)
 def handle_exception(error):

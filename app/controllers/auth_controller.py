@@ -4,7 +4,7 @@ from app.schemas.auth_schema import UserRegisterSchema, UserLoginSchema
 from app.utils.errors import UnprocessableEntityError, UnauthorizedError
 from app.utils.api_responses import build_success_response, build_error_response
 
-auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
+auth_bp = Blueprint("auth", __name__)
 
 
 @auth_bp.route("/register", methods=["POST"])

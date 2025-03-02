@@ -2,6 +2,7 @@ from app.database import db_session
 from app.models.generated_text import GeneratedText
 from app.utils.errors import NotFoundError, UnauthorizedError
 
+
 class GeneratedTextService:
     """Service for handling generated text storage and retrieval."""
 
@@ -11,7 +12,7 @@ class GeneratedTextService:
         Store generated text in the database.
         """
         new_text = GeneratedText(user_id=user_id, prompt=prompt, response=response)
-        
+
         db_session.add(new_text)
         db_session.commit()
 
@@ -33,7 +34,7 @@ class GeneratedTextService:
 
         if not text:
             raise NotFoundError("Generated text not found.")
-        
+
         if text.user_id != user_id:
             raise UnauthorizedError("You are not authorized to access this resource.")
         

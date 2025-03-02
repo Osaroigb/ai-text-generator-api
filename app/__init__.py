@@ -1,5 +1,5 @@
 from flask import Flask
-from config import Config
+from .config import Config
 from flask_cors import CORS
 import datetime as datetimeInstance
 from flask_jwt_extended import JWTManager

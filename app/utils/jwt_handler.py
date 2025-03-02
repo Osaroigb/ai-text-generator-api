@@ -15,11 +15,12 @@ class JWTHandler:
         :return: Encoded JWT token as a string.
         """    
         payload = {
+            "sub": f"{user_id}",
             "identity": user_id,
             "exp": datetime.now(timezone.utc) + timedelta(seconds=Config.JWT_EXPIRY_IN_SECONDS)
         }
 
-        token = jwt.encode(payload, Config.JWT_SECRET_KEY, algorithms="HS256")
+        token = jwt.encode(payload, Config.JWT_SECRET_KEY, algorithm="HS256")
         return token
 
 
@@ -35,9 +36,12 @@ class JWTHandler:
             decoded_token = jwt.decode(
                 token, 
                 Config.JWT_SECRET_KEY, 
-                algorithms="HS256",
+                algorithm="HS256",
                 options={"require_exp": True}
             )
+
+            if "sub" not in decoded_token:
+                raise UnauthorizedError("Missing claim: sub")
 
             return decoded_token
         
@@ -61,10 +65,10 @@ class JWTHandler:
             data = jwt.decode(
                 token,
                 Config.JWT_SECRET_KEY,
-                algorithms=["HS256"],
+                algorithm=["HS256"],
                 options={"require_exp": True},
             )
-            
+
             return data["identity"]
 
         except jwt.ExpiredSignatureError:

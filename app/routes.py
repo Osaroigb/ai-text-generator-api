@@ -1,5 +1,5 @@
 from . import app
-from config import logging
+from .config import logging
 from app.controllers.auth_controller import auth_bp
 from app.controllers.text_generation_controller import text_bp
 from .utils.api_responses import build_error_response, build_success_response
@@ -7,6 +7,12 @@ from .utils.errors import UnprocessableEntityError, NotFoundError, OperationForb
 
 # Global API prefix
 API_PREFIX = "/api"
+
+@app.route("/favicon.ico")
+def favicon():
+    """Handle favicon requests to prevent 404 errors."""
+    return "", 204
+
 
 # Define the home route
 @app.route(API_PREFIX, methods=['GET'])

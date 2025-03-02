@@ -2,6 +2,7 @@ from app.database import Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String
 
+
 class User(Base):
     """User model for authentication."""
     

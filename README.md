@@ -19,7 +19,6 @@ Ensure you have the following installed:
 - 🐍 **Python 3.10+**
 - 🐘 **PostgreSQL 15+**
 - 🐳 **Docker & Docker Compose** (for containerized deployment)
-- 💾 **Redis (optional for caching)**
 
 ---
 
@@ -78,6 +77,13 @@ The API will be available at:
 ```sh
 docker-compose up --build
 ```
+
+When running locally using Docker, update your DATABASE_URL in the .env file to:
+
+DATABASE_URL=postgresql://postgres:db_password@postgres_db:5432/db_name
+
+This is necessary because postgres_db is the hostname used in docker-compose.yml.
+
 ### **2️⃣ Stop Containers**
 ```sh
 docker-compose down
@@ -99,7 +105,11 @@ docker-compose exec app pytest tests/
 ---
 
 ## **📖 API Documentation**
+📌 Postman API Docs[https://documenter.getpostman.com/view/23691550/2sAYdimUQ6]
+
+
 ### **1️⃣ Authentication**
+
 #### **🔹 Register a User**
 **Endpoint:** `POST /api/auth/register`  
 **Request:**

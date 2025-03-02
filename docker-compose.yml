@@ -1,20 +1,20 @@
 version: "3.8"
 
 services:
-  app:
+  flask_app:
     build: .
-    container_name: flask_app
+    container_name: flask_api
     restart: always
     depends_on:
-      - db
+      - postgres_db
     ports:
-      - "5000:5000"
+      - "8080:8080"
     env_file:
       - .env
     volumes:
-      - .:/app
+      - .:/flask_app
 
-  db:
+  postgres_db:
     image: postgres:15
     container_name: postgres_db
     restart: always

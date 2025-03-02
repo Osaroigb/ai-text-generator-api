@@ -21,14 +21,17 @@ def create_user():
     def _create(username, password_hash):
         user = User(username=username, password_hash=password_hash)
         db_session.add(user)
+
         db_session.commit()
         return user
+    
     return _create
 
 
 def test_register_invalid_username(client):
     """Ensure that a short username fails validation."""
     response = client.post("/api/auth/register", json={"username": "ab", "password": "securepassword"})
+
     assert response.status_code == 422
     assert "Invalid input." in response.json["error_message"]
 
@@ -36,6 +39,7 @@ def test_register_invalid_username(client):
 def test_register_invalid_password(client):
     """Ensure that a short password fails validation."""
     response = client.post("/api/auth/register", json={"username": "validUser", "password": "123"})
+
     assert response.status_code == 422
     assert "Invalid input." in response.json["error_message"]
 
@@ -43,8 +47,10 @@ def test_register_invalid_password(client):
 def test_register_success(client):
     """Ensure a user can successfully register."""
     response = client.post("/api/auth/register", json={"username": "testuser", "password": "securepassword"})
+
     assert response.status_code == 201
     assert response.json["success"] is True
+
     assert "User registered successfully" in response.json["message"]
     assert "username" in response.json["data"]
 
@@ -61,6 +67,7 @@ def test_register_duplicate_username(client):
 def test_login_invalid_username(client):
     """Ensure that logging in with an invalid username fails."""
     response = client.post("/api/auth/login", json={"username": "ab", "password": "securepassword"})
+
     assert response.status_code == 422
     assert "Invalid input." in response.json["error_message"]
 
@@ -68,6 +75,7 @@ def test_login_invalid_username(client):
 def test_login_invalid_password(client):
     """Ensure that logging in with an invalid password fails."""
     response = client.post("/api/auth/login", json={"username": "validUser", "password": "123"})
+
     assert response.status_code == 422
     assert "Invalid input." in response.json["error_message"]
 
@@ -75,8 +83,9 @@ def test_login_invalid_password(client):
 def test_login_non_existent_user(client):
     """Ensure logging in with a non-existent user fails."""
     response = client.post("/api/auth/login", json={"username": "nouser", "password": "securepassword"})
+    
     assert response.status_code == 401
-    assert "Invalid username or password." in response.json["error_message"]
+    assert response.json["error_message"] == "Invalid username."
 
 
 def test_login_success(client):
@@ -87,7 +96,7 @@ def test_login_success(client):
     assert response.status_code == 200
     assert response.json["success"] is True
     assert "Login successful" in response.json["message"]
-    assert "token" in response.json["data"]
+    assert "access_token" in response.json["data"]
 
 
 def test_login_wrong_password(client):
@@ -96,4 +105,4 @@ def test_login_wrong_password(client):
     response = client.post("/api/auth/login", json={"username": "testuser", "password": "wrongpassword"})
 
     assert response.status_code == 401
-    assert "Invalid username or password." in response.json["error_message"]
+    assert response.json["error_message"] == "Incorrect password."

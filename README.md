@@ -105,8 +105,7 @@ docker-compose exec app pytest tests/
 ---
 
 ## **📖 API Documentation**
-📌 Postman API Docs[https://documenter.getpostman.com/view/23691550/2sAYdimUQ6]
-
+📌 [Postman API Docs]([https://www.example.com](https://documenter.getpostman.com/view/23691550/2sAYdimUQ6))
 
 ### **1️⃣ Authentication**
 

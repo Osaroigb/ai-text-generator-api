@@ -68,7 +68,7 @@ DATABASE_URL=postgresql://postgres:your_password@localhost:5432/your_db_name
 python run.py
 ```
 The API will be available at:  
-📍 **http://127.0.0.1:8080/api**
+📍 [Home route](http://127.0.0.1:8080/api)
 
 ---
 
@@ -88,7 +88,7 @@ This is necessary because postgres_db is the hostname used in docker-compose.yml
 ```sh
 docker-compose down
 ```
-✅ The API is now running at **http://localhost:8080/api**.
+✅ The API is now running at [Home route](http://127.0.0.1:8080/api)
 
 ---
 
@@ -105,7 +105,7 @@ docker-compose exec app pytest tests/
 ---
 
 ## **📖 API Documentation**
-📌 [Postman API Docs]([https://www.example.com](https://documenter.getpostman.com/view/23691550/2sAYdimUQ6))
+📌 [Postman API Docs](https://documenter.getpostman.com/view/23691550/2sAYdimUQ6)
 
 ### **1️⃣ Authentication**
 

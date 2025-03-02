@@ -50,26 +50,16 @@ pip install -r requirements.txt
 Create a `.env` file in the project root:
 ```
 # Flask Configuration
+APP_PORT=8080
 APP_HOST=0.0.0.0
-APP_PORT=5000
+APP_NAME="AI Text Generator"
+APP_ENV=development
 JWT_SECRET_KEY=mysecretkey
+JWT_EXPIRY_IN_SECONDS=3600
 OPENAI_API_KEY=your-openai-api-key
 
 # PostgreSQL Configuration
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=1997DON_osaro
-POSTGRES_DB=blockops
-DATABASE_URL=postgresql://postgres:1997DON_osaro@localhost:5432/blockops
-```
-
-### **2️⃣ Run Database Migrations**
-If using **Alembic** (recommended), run:
-```sh
-alembic upgrade head
-```
-If using **SQLAlchemy** without migrations, run:
-```sh
-python run.py
+DATABASE_URL=postgresql://postgres:your_password@localhost:5432/your_db_name
 ```
 
 ---
@@ -79,7 +69,7 @@ python run.py
 python run.py
 ```
 The API will be available at:  
-📍 **http://127.0.0.1:5000/api**
+📍 **http://127.0.0.1:8080/api**
 
 ---
 
@@ -92,7 +82,7 @@ docker-compose up --build
 ```sh
 docker-compose down
 ```
-✅ The API is now running at **http://localhost:5000/api**.
+✅ The API is now running at **http://localhost:8080/api**.
 
 ---
 
